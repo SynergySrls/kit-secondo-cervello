@@ -1,0 +1,86 @@
+# Controllo del secondo cervello su GitHub.
+# Gira a ogni salvataggio sul ramo main che tocca i file che contano, ogni giorno alle 6:00 del tempo
+# universale e a mano (scheda Actions, «Run workflow»). Lancia bin/controlla.mjs, manda gli avvisi con
+# bin/avvisa.mjs, salva wiki/meta/stato-controlli.md solo se è cambiato e, se ci sono rossi, l'ultimo
+# passo fallisce: così GitHub manda una mail al proprietario del repository. L'ultimo passo gira solo nel giro
+# quotidiano e in quello lanciato a mano: la sincronizzazione carica ogni pochi minuti, e un rosso che resta
+# manderebbe una mail a ogni salvataggio. Lanciato a mano manda anche il riepilogo su Telegram.
+# Con un repository online la pagina di stato la scrive solo questo flusso (sul computer --scrivi non scrive).
+# Pagine della wiki: wiki/entities/strumenti/controlla.md e wiki/entities/strumenti/avvisa.md
+#
+# Segreti facoltativi del repository (Settings, Secrets and variables, Actions): TELEGRAM_BOT_TOKEN e
+# TELEGRAM_CHAT_ID. Senza, il controllo gira lo stesso e gli avvisi restano nel registro del flusso.
+# Se il ramo principale non si chiama main, va cambiato qui sotto in due punti.
+
+name: Controllo del cervello
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'wiki/**'
+      - 'automazioni/**'
+      - 'bin/**'
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
+      - '.claude/**'
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: controllo-cervello
+  cancel-in-progress: true
+
+jobs:
+  controllo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Controllo
+        run: |
+          node bin/controlla.mjs --json > "$RUNNER_TEMP/esito.json" || true
+          node bin/controlla.mjs --scrivi || true
+
+      - name: Avvisi su Telegram
+        # un avviso non riuscito non deve impedire di salvare lo stato
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: node bin/avvisa.mjs --da-controllo "$RUNNER_TEMP/esito.json"
+
+      - name: Salva lo stato se è cambiato
+        run: |
+          if [ -z "$(git status --porcelain -- wiki/meta/stato-controlli.md)" ]; then
+            echo "Stato dei controlli invariato."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add wiki/meta/stato-controlli.md
+          git commit -q -m "Stato dei controlli aggiornato [skip ci]"
+          for tentativo in 1 2 3; do
+            if git pull --rebase -q origin main && git push -q origin HEAD:main; then
+              echo "Stato dei controlli salvato."
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep 5
+          done
+          echo "::warning::Stato dei controlli non salvato dopo 3 tentativi."
+
+      - name: Esito (fallisce se ci sono rossi)
+        if: github.event_name != 'push'
+        run: node bin/controlla.mjs

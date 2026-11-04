@@ -1,0 +1,10 @@
+# I file restano come sono sul disco: niente conversioni dei fine riga tra Windows, macOS e Linux
+* -text
+
+# File a voci indipendenti scritti da più agenti (sessioni, routine, computer diversi): se due modifiche arrivano
+# insieme, Git tiene le righe di tutte e due invece di fermarsi in conflitto (strategia «union», inclusa in Git).
+# Per questo hot si scrive solo aggiungendo in cima a «In corso adesso» e il log solo aggiungendo in fondo.
+# L'unione può lasciare due righe «updated» nel frontmatter di hot: il controllo g le segnala, il controllo m e l'hook
+# di avvio leggono comunque la data più recente, e il Custode tiene solo quella.
+wiki/log.md merge=union
+wiki/hot.md merge=union

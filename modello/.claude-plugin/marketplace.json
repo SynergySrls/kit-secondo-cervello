@@ -1,0 +1,17 @@
+{
+  "name": "secondo-cervello",
+  "owner": {
+    "name": "{{DA COMPILARE: il tuo nome o la tua organizzazione}}"
+  },
+  "metadata": {
+    "description": "Plugin generati dalle pagine del cervello: non si modificano a mano (node bin/costruisci.mjs)."
+  },
+  "plugins": [
+    {
+      "name": "cervello",
+      "source": "./automazioni/plugin-cervello",
+      "description": "Porta le istruzioni, il nucleo delle regole e lo strumento giusto del secondo cervello nelle chat senza cartella.",
+      "version": "0.1.0"
+    }
+  ]
+}

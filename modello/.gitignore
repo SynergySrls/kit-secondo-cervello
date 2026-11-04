@@ -1,0 +1,110 @@
+# Secondo cervello: cosa NON va su Git.
+# Nel cervello entra solo conoscenza in testo: i dati privati, le chiavi e i file pesanti restano fuori.
+
+# Dati personali e privati: restano solo sul computer
+personale/
+
+# Fonti grezze: restano solo sul computer, perché esportazioni, trascrizioni e mail contengono dati di altre persone.
+# Nel cervello entra il dato estratto, con il link all'originale. Su Git vanno solo questo LEGGIMI e le note per il
+# cervello di .raw/inbox/ (scritte già senza segreti né recapiti).
+.raw/*
+!.raw/LEGGIMI.md
+!.raw/inbox/
+
+# Credenziali e chiavi, in qualunque cartella
+*.env
+.env*
+!.env.example
+*credenzial*
+*password*
+*secret*
+*.pem
+*.key
+id_rsa*
+*service-account*.json
+
+# File pesanti: gli originali stanno in una cartella cloud o sul computer, nel cervello si estrae il dato
+*.pdf
+*.zip
+*.rar
+*.7z
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+*.odt
+*.ods
+*.odp
+*.mp3
+*.m4a
+*.wav
+*.ogg
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.psd
+*.ai
+*.tar
+*.gz
+*.tgz
+*.bz2
+*.xz
+*.iso
+*.dmg
+*.exe
+*.msi
+*.heic
+*.webm
+*.m4v
+*.wmv
+*.flac
+*.aac
+*.sqlite
+*.db
+# Un file oltre 50 MB (sincronizza.maxMB) la sincronizzazione lo tiene fuori dal commit comunque: GitHub rifiuta
+# i file oltre 100 MB e il caricamento si bloccherebbe.
+
+# Collegamenti di Google Drive (non sono file veri) e cartelle temporanee dei programmi di sincronizzazione
+*.gdoc
+*.gsheet
+*.gslides
+.tmp.driveupload/
+.tmp.drivedownload/
+.dropbox.cache/
+~$*
+.~lock.*#
+
+# Rumore di sistema, di Obsidian e degli strumenti
+desktop.ini
+Thumbs.db
+.DS_Store
+.obsidian/workspace*.json
+node_modules/
+__pycache__/
+.venv/
+
+# Cartelle che crea l'uso: ciò che esce dal cervello (la svuota l'utente) e il pacchetto per le chat
+_da_eliminare/
+esporta/
+
+# Impostazioni locali di Claude Code (i permessi di questo computer)
+.claude/settings.local.json
+
+# Le pagine della wiki non si escludono mai per nome (per esempio una pagina sul gestore di password): i segreti
+# non ci stanno per regola, e il controllo e) di bin/controlla.mjs li cerca lo stesso.
+!wiki/**/*.md
+# Lo stesso per gli strumenti, le procedure e i comandi: una procedura che si chiama, per esempio,
+# rotazione-credenziali.md deve arrivare agli altri computer (il controllo l lo verifica).
+!bin/**/*.mjs
+!bin/**/*.js
+!bin/**/*.cjs
+!bin/**/*.py
+!bin/**/*.ps1
+!bin/**/*.sh
+!bin/**/*.md
+!automazioni/**/*.md
+!.claude/commands/*.md
+!.claude/agents/*.md

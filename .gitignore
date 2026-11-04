@@ -1,0 +1,4 @@
+# Kit «secondo cervello»: cosa non va su Git
+# dist/: i pacchetti pronti da scaricare, si rifanno dal kit
+dist/
+node_modules/

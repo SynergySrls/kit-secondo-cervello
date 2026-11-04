@@ -1,0 +1,33 @@
+{
+  "versione": 1,
+  "persona": "{{DA COMPILARE: il tuo nome}}",
+  "lingua": "italiano",
+  "ambiti": [
+    { "chiave": "tutto", "titolo": "Valgono sempre" },
+    { "chiave": "scrittura", "titolo": "Testi che leggerà qualcun altro" }
+  ],
+  "fileRegolaAmbito": "wiki/concepts/ambito.md",
+  "caratteriVietati": [
+    { "nome": "lineetta lunga", "carattere": "\u2014", "consiglio": "usa due punti, virgole, parentesi o un punto fermo" },
+    { "nome": "lineetta media", "carattere": "\u2013", "consiglio": "usa due punti, virgole, parentesi o un punto fermo; negli intervalli il trattino breve" }
+  ],
+  "zonaVincolante": ["AGENTS.md", "CLAUDE.md", "wiki/meta/nucleo.md", "automazioni/", "type: regola"],
+  "esentiStile": ["wiki/meta/frasi-superate.md", "wiki/meta/stato-controlli.md"],
+  "hot": { "file": "wiki/hot.md", "sezione": "In corso adesso", "giorni": 14, "maxKB": 40 },
+  "vocabolario": {
+    "type": ["regola", "concetto", "persona", "azienda", "cliente", "progetto", "strumento", "fonte", "riunione",
+             "procedura", "routine", "meta", "nota-inbox"],
+    "status": ["current", "draft", "prospect", "superseded", "archived", "evergreen"]
+  },
+  "marketplace": { "nome": "secondo-cervello", "proprietario": "{{DA COMPILARE: il tuo nome o la tua organizzazione}}" },
+  "chiavi": {
+    "cartella": "~/Cervello-Privato/chiavi",
+    "elenco": {
+      "telegram-token": { "env": ["TELEGRAM_BOT_TOKEN"], "file": "telegram-token.txt" },
+      "telegram-chat": { "env": ["TELEGRAM_CHAT_ID"], "file": "telegram-chat.txt" }
+    }
+  },
+  "sincronizza": { "ramo": "main", "prefissoConflitti": "conflitto/", "minuti": 10, "pausaOre": 3, "lockMinuti": 15, "maxMB": 50 },
+  "hook": { "spentiSu": [] },
+  "limiti": { "istruzioniChat": 8000, "agentsKB": 32, "fileEsportaKB": 300, "fileEsportaMax": 20, "istruzioniBrevi": 5000 }
+}
