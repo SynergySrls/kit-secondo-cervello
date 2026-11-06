@@ -9,7 +9,7 @@ Dei controlli automatici trovano ciò che la memoria dell'AI dimentica: link rot
 Funziona con qualunque AI, perché tutto sta in file aperti, markdown (testo semplice con pochi segni) e Git (la storia
 di ogni modifica), e non dentro una piattaforma.
 
-Versione del kit: 1, del 2026-11-04. La prima voce del log del tuo cervello la riporta; per portare in un cervello
+Versione del kit: 1.1, del 2026-11-06 (in più `INSTALLA.md`). La prima voce del log del tuo cervello la riporta; per portare in un cervello
 già in uso gli script di un kit più nuovo, vedi la guida, capitolo 14.6.
 
 ## Tre strade
@@ -28,6 +28,7 @@ Si sale da un livello all'altro senza rifare niente. Se non sai quale scegliere,
 LEGGIMI.md           questa pagina
 GUIDA.md             la guida completa: idee, livelli passo per passo, uso quotidiano, regole, errori da evitare
 PROMPT-DI-AVVIO.md   il prompt da incollare nell'AI la prima volta
+INSTALLA.md          le istruzioni per un'AI con il terminale che installa e costruisce tutto, dall'inizio alla fine
 piattaforme/         una scheda per famiglia di AI (Claude, ChatGPT e Codex, Google, Microsoft e GitHub, altri),
                      ognuna con la data di verifica
 modello/             il cervello vuoto: è questa la cartella che copi e diventa tua
@@ -36,6 +37,10 @@ CLAUDE.md            istruzioni per chi fa manutenzione al kit (non servono per 
 ```
 
 ## Da dove partire
+
+**La via più corta:** apri un agente con il terminale (Claude Code, Codex, Cursor o un altro) e chiedigli di leggere e
+seguire `INSTALLA.md` di questo kit. Fa lui i passi qui sotto, ti intervista e ti dice cosa resta da fare a te
+(gli accessi e le chiavi li fai sempre tu). A mano, invece:
 
 1. Leggi il capitolo 0 di `GUIDA.md` («In una pagina») e scegli il livello (capitolo 2).
 2. Apri la scheda della tua AI in `piattaforme/`.
