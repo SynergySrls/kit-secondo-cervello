@@ -71,7 +71,7 @@ Con un Gem:
    indicati: se il testo viene tagliato, accorcia le «In breve» delle regole meno usate o mettile `nucleo: no`.
 2. Aggiungi come file i `conoscenza-*.md`. Se li tieni in una cartella di Drive, il Gem legge sempre l'ultima
    versione: dopo ogni `--esporta` sostituisci i file in quella cartella. È una copia di sola lettura del pacchetto,
-   non il cervello: il cervello non sta mai dentro Drive.
+   non il cervello: il cervello di norma non sta dentro Drive, tranne la strada D del capitolo 2.1 della guida.
 3. Dopo il primo aggiornamento controlla che il Gem legga davvero i file nuovi: chiedigli la prima riga di
    `conoscenza-01-inizio.md` («Esportato il ...») e confronta la data.
 4. Quando ti dà una NOTA PER IL CERVELLO, salvala nella cartella `.raw/inbox/` del cervello.
@@ -116,6 +116,13 @@ leggere `AGENTS.md`. Per tutti gli altri è chiuso: passa ad Antigravity.
   settimana con Antigravity.
 - Le azioni pianificate di Gemini *(da confermare)* servono per un promemoria o un riassunto che chiude con una nota
   per il cervello: non scrivono nella cartella.
+
+## Strada C: solo GitHub, con un agente nel cloud
+
+Su Google la strada C del capitolo 2.1 della guida (il cervello solo nel repository privato su GitHub, con un agente
+nel cloud) oggi non c'è: Jules legge `AGENTS.md`, ma chiude il 31/12/2026 e sulle sessioni si lavora solo fino
+all'11/11/2026; Antigravity lavora su una cartella del computer. Per la C serve un'altra piattaforma (le schede
+`piattaforme/claude.md`, `piattaforme/microsoft-e-github.md`, `piattaforme/chatgpt-e-codex.md`, `piattaforme/altri.md`).
 
 ## Cosa non si può fare
 

@@ -131,6 +131,16 @@ dice». Dal web e dal telefono questa strada non c'è.
   rifatta a ogni versione.
 - Codex Cloud è marcato «Legacy» *(da confermare)*: non costruirci sopra le routine finché non è chiaro.
 
+## Strada C: solo GitHub, con un agente nel cloud
+
+Per la strada C del capitolo 2.1 della guida (il cervello solo nel repository privato su GitHub, senza una cartella sul
+computer) qui servirebbe Codex nel cloud su un repository GitHub, ma la sua pagina è marcata «Legacy» *(da
+confermare)*: prima di sceglierlo, controlla sulle pagine ufficiali che ci sia ancora e come salva (sul ramo principale
+o su un ramo da unire). Codex legge `AGENTS.md` da solo; l'installazione la guida `INSTALLA.md` del kit, e si salva con
+`git add -A`, commit e push sul ramo che la piattaforma usa, mai con `node bin/sincronizza.mjs`. Se non c'è, per la C
+serve un'altra piattaforma (le schede `piattaforme/claude.md`, `piattaforme/microsoft-e-github.md`,
+`piattaforme/altri.md`).
+
 ## Cosa non si può fare
 
 - Dal web e dal telefono ChatGPT non scrive file: lì si lavora con le note per il cervello.

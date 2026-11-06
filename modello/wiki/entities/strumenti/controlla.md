@@ -4,7 +4,7 @@ type: strumento
 tags: [strumento, cervello, controllo, sicurezza]
 status: current
 created: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-06
 # esporta: no, perché la pagina serve solo sul computer: resta fuori dal pacchetto per le chat
 esporta: no
 ---
@@ -51,7 +51,7 @@ Ogni controllo ha una lettera e mostra al massimo 30 casi. Se un controllo va in
 | h | File generati: nucleo, blocchi generati, marketplace (con [[costruisci]] in prova, senza scrivere) | qualcosa è indietro | |
 | i | Battiti delle automazioni, con le cadenze della tabella «Battiti» di `automazioni/LEGGIMI.md` | il battito è più vecchio della cadenza più un giorno | il file del battito non c'è ancora («non ancora partito»), la cadenza non è scritta, l'ultimo giro dice «esito: errore» o la data non si legge |
 | j | Radice del cervello | manca `AGENTS.md` o il suo blocco generato del nucleo, oppure `bin/impostazioni.json` manca o non è JSON valido (i controlli usano allora i valori predefiniti) | file di istruzioni in più (`README*`, `LEGGIMI*`, `HANDOFF*`, `ISTRUZIONI*`, `*-START.md`) |
-| k | Doppioni: nomi con «(1)», « 2.», «copia di», «copy of», «- Copia» | | qualunque caso |
+| k | Doppioni: i nomi tipici delle copie in conflitto, cioè «(1)», « 2.», «copia di», «copy of», «- Copia», «conflicted copy» o «copia in conflitto» (Dropbox), e il nome di questo computer in coda prima dell'estensione, come fa OneDrive (per esempio `riunione-<nome computer>.md`, senza distinguere maiuscole). Una copia con un nome diverso può sfuggire | | qualunque caso |
 | l | `.gitignore`: con Git, verifica che nessuna pagina `.md` di `wiki/` e nessun file di testo di `bin/`, `automazioni/`, `.claude/` e `.github/` risulti escluso (tranne le impostazioni locali di Claude Code) | un file è escluso | |
 | m | [[hot]]: voci di «In corso adesso» più vecchie di 14 giorni, file sopra i 40 KB, nessun aggiornamento da più di 7 giorni (vale la data più recente fra `updated` e le voci), righe `updated` doppie | | qualunque caso (le voci vecchie le archivia il Custode) |
 | n | Segnaposto «DA COMPILARE» (tra doppie parentesi graffe) ancora presenti, e nelle pagine di `wiki/` i segnaposto dei modelli rimasti (`<...>`, date AAAA-MM-GG) | | con il conteggio per file |
@@ -69,6 +69,9 @@ Dettagli che contano:
   «superat», «abolit» o «non vale più», le sezioni di storia, origine, «perché esiste» e log, le pagine superate o
   archiviate, il log, hot e i suoi archivi. Le pagine indicate nella colonna «Superata da» sono escluse.
 - Il controllo e non guarda `bin/controlla.mjs`, che contiene i modelli delle chiavi da cercare.
+- Il controllo k segna anche un nome che contiene «conflitt» per altri motivi (per esempio `gestione-conflitti.md`):
+  è un giallo da guardare, non un errore. Il nome del computer lo legge da quello su cui gira: un doppione nato su un
+  altro computer con OneDrive ha il nome di quell'altro e può sfuggire.
 - Le soglie del controllo m (14 giorni, 40 KB) sono quelle di `hot` in `bin/impostazioni.json`.
 - Il controllo n guarda solo i file `.md`, `.json`, `.yml` e `.txt` scritti a mano: non conta le copie generate
   (nucleo, blocchi generati, `marketplace.json`), i modelli di `_modelli/` (che usano `<...>`) e la sintassi del

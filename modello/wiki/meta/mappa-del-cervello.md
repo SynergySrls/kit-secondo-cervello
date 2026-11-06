@@ -17,6 +17,16 @@ ne accorga.
 Regola della pagina: chi crea, sposta o spegne qualcosa fuori dalla cartella aggiorna la sua riga qui nello stesso
 lavoro. Le righe con il segnaposto sono esempi: si compilano o si tolgono.
 
+## Dove vive il cervello
+
+La strada scelta alla nascita (A sul computer, B computer e GitHub, C solo GitHub, D in un archivio cloud come Drive,
+OneDrive, Dropbox o iCloud) decide chi scrive e cosa funziona ([[dove-si-lavora]]). Se la strada cambia, si scrive
+qui la nuova con la data, e la vecchia resta sotto come storia.
+
+| Strada | Copia su cui si scrive | Chi scrive | Conseguenze accettate | Dal |
+|---|---|---|---|---|
+| {{DA COMPILARE: A, B, C o D}} | {{DA COMPILARE: cartella o repository}} | {{DA COMPILARE: computer o agente nel cloud; con la D l'unico computer che scrive}} | {{DA COMPILARE: in una riga, per esempio «D: un solo computer, niente Git, storia corta»}} | {{DA COMPILARE: data}} |
+
 ## Account delle AI e plugin
 
 | Cosa | Dove | Chi lo aggiorna | Pagina |

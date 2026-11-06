@@ -66,7 +66,8 @@ I dettagli:
 3. Agent Builder non accetta i `.md` come conoscenza: prepara il pacchetto con `node bin/costruisci.mjs --esporta --txt`
    e carica i file `esporta/conoscenza-*.txt`. Il pacchetto ne fa al massimo 20 (`limiti.fileEsportaMax`), quanti se ne
    possono caricare. Se preferisci tenerli in OneDrive o SharePoint, metti lì solo il pacchetto: è una copia di sola
-   lettura. Il cervello non sta mai in OneDrive. In alternativa al nucleo nelle istruzioni, puoi caricare come skill
+   lettura. Il cervello di norma non sta in OneDrive, tranne la strada D del capitolo 2.1 della guida. In alternativa
+   al nucleo nelle istruzioni, puoi caricare come skill
    uno zip della cartella `automazioni/plugin-cervello/skills/cervello` con `SKILL.md` alla radice dello zip: è una
    copia, da ricaricare quando cambia la versione del plugin.
 4. Le regole restano nelle istruzioni: è per questo che `istruzioni-chat.md` contiene il nucleo intero. Se un file di
@@ -80,7 +81,9 @@ I dettagli:
 Con Copilot Cowork di Microsoft:
 - Lavora su file Office in OneDrive e SharePoint; il cervello è fatto di file markdown in una cartella del computer,
   con Git. Che Cowork lavori su una cartella locale o con Git non è documentato *(da confermare)*: non spostare il
-  cervello in OneDrive per farglielo vedere, perché una cartella sincronizzata crea doppioni.
+  cervello in OneDrive per farglielo vedere, perché una cartella sincronizzata crea doppioni. Di norma il cervello non
+  sta in OneDrive, tranne la strada D del capitolo 2.1 della guida; e anche con la D, Copilot Cowork che modifica i
+  file su OneDrive sarebbe un secondo scrittore accanto al computer.
 - Puoi portargli le regole come skill: Customize > Skills > Upload skill, con uno zip della cartella
   `automazioni/plugin-cervello/skills/cervello` (`SKILL.md` alla radice dello zip), oppure Customize > Plugins > Upload
   plugin con lo zip di `automazioni/plugin-cervello`. È una copia: non si modifica lì, si cambia il cervello e si
@@ -112,6 +115,16 @@ Con GitHub Copilot sul repository del cervello (serve il repository su GitHub de
 - Per il Custode serve un'altra piattaforma (`piattaforme/claude.md`, `piattaforme/altri.md`) oppure il prompt D, una
   volta a settimana, con un agente che lavora nella cartella.
 
+## Strada C: solo GitHub, con un agente nel cloud
+
+Per la strada C del capitolo 2.1 della guida (il cervello solo nel repository privato su GitHub, senza una cartella sul
+computer) c'è l'agente nel cloud di GitHub Copilot: lavora sul repository del cervello e legge `AGENTS.md` e
+`CLAUDE.md` alla radice (verificato il 04/11/2026). L'installazione la guida `INSTALLA.md` del kit. Le modifiche
+arrivano su un ramo separato, con una richiesta di modifica da unire tu su GitHub *(da confermare)*; si salva con
+`git add -A`, commit e push, mai con `node bin/sincronizza.mjs`. I controlli automatici di Claude Code qui non
+partono: a fine lavoro serve la chiusura di sessione di `AGENTS.md`. Se un caricamento che tocca `.github/workflows/`
+viene rifiutato, l'accesso dell'agente non ha quel permesso *(da confermare)*: il file lo carichi tu dal sito.
+
 ## Cosa non si può fare
 
 - Cartella locale e Git non sono documentati per Copilot Cowork *(da confermare)*.
@@ -123,7 +136,9 @@ Con GitHub Copilot sul repository del cervello (serve il repository su GitHub de
 
 - **Stesso nome, prodotti diversi.** Copilot Cowork è di Microsoft, Cowork è di Claude: le schede sono separate.
 - **Il cervello in OneDrive.** Per farlo vedere a Copilot viene la tentazione di spostarlo: nascono doppioni e
-  modifiche senza revisione. In OneDrive va solo il pacchetto di `--esporta`, o la copia della skill.
+  modifiche senza revisione. Di norma, tranne la strada D del capitolo 2.1 della guida, in OneDrive va solo il
+  pacchetto di `--esporta`, o la copia della skill; e anche con la D, Copilot Cowork che modifica i file su OneDrive
+  sarebbe un secondo scrittore.
 - **Copie che restano indietro.** La skill copiata in OneDrive e i file caricati in Agent Builder non si aggiornano da
   soli: dopo ogni cambio di regola si ricaricano.
 - **Margine stretto sulle istruzioni.** 8.000 caratteri si superano in fretta: guarda la misura che stampa

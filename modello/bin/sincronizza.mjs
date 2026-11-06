@@ -245,7 +245,8 @@ function giro() {
 
   // La cartella del cervello deve essere la radice di un repository Git (mai il repository di una cartella sopra).
   const top = git(['rev-parse', '--show-toplevel']);
-  if (top.codice !== 0) throw new Fermo('la cartella del cervello non è un repository Git (git init, poi git remote add origin <indirizzo>)');
+  if (top.codice !== 0) throw new Fermo('la cartella del cervello non è un repository Git (git init, poi git remote add origin <indirizzo>; ' +
+    'se il cervello sta in un archivio cloud per scelta, strada D, la sincronizzazione non si usa: niente git init in quella cartella)');
   const vero = p => { try { return fs.realpathSync.native(p); } catch { return path.resolve(p); } }; // link e nomi brevi
   const uguali = (a, b) => process.platform === 'win32' || process.platform === 'darwin'
     ? vero(a).toLowerCase() === vero(b).toLowerCase() : vero(a) === vero(b);

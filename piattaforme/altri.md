@@ -138,8 +138,22 @@ Come si usa il kit:
 2. Un plugin AI che crea e modifica note è un agente con la cartella: non è verificato che legga `AGENTS.md`, quindi
    comincia con «leggi AGENTS.md e fai quello che dice». Se il plugin porta dentro Claude Code o Codex, valgono le
    loro schede.
-3. Non mettere la cartella del cervello in Drive, OneDrive o Dropbox per vederla su altri dispositivi: è la strada dei
-   doppioni.
+3. Per vedere il cervello su altri dispositivi la strada più sicura è la B del capitolo 2.1 della guida, con una copia
+   di sola lettura nell'archivio cloud. La cartella del cervello dentro Drive, OneDrive o Dropbox (strada D) regge
+   solo con un computer che scrive: con due nascono doppioni.
+
+## Strada C: solo GitHub, con un agente nel cloud
+
+Per la strada C del capitolo 2.1 della guida (il cervello solo nel repository privato su GitHub, senza una cartella sul
+computer), tra queste piattaforme *(da confermare)*:
+- **Cursor**, con gli agenti nel cloud che lavorano su un repository: con un repository il risultato previsto è una
+  richiesta di modifica da unire tu, non un salvataggio diretto sul ramo principale;
+- **Mistral Vibe Code**, con le sessioni remote su un repository GitHub, che modificano file e aprono richieste di
+  modifica; il file di istruzioni non è indicato, quindi si comincia con «leggi AGENTS.md e fai quello che dice».
+
+Devin Desktop, i modelli locali e Obsidian lavorano su una cartella del computer. L'installazione la guida
+`INSTALLA.md` del kit; si salva con `git add -A`, commit e push sul ramo che la piattaforma usa, mai con
+`node bin/sincronizza.mjs`.
 
 ## Cosa non si può fare
 

@@ -4,7 +4,7 @@ type: strumento
 tags: [strumento, cervello, git, sincronizzazione]
 status: current
 created: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-06
 # esporta: no, perché la pagina serve solo sul computer: resta fuori dal pacchetto per le chat
 esporta: no
 ---
@@ -63,8 +63,9 @@ Dentro:
 4. Si ferma e lo scrive («FERMO» nel registro) se c'è un rebase, un merge, un cherry-pick o un revert rimasto a
    metà, se un file ha un conflitto non risolto (segni `<<<<<<<` dentro), se il cervello non è sul ramo principale
    (se il ramo principale non esiste ancora, per esempio il repository è nato su `master`, consiglia
-   `git branch -m main`), o se la cartella non è la radice del suo repository Git (così non salva mai un repository
-   che sta sopra). Va sistemato a mano.
+   `git branch -m main`), se la cartella non è un repository Git, o se non è la radice del suo repository Git (così non
+   salva mai un repository che sta sopra). Va sistemato a mano. Se la cartella non è un repository perché il cervello
+   sta in un archivio cloud per scelta (strada D), il messaggio lo dice: lì la sincronizzazione non si usa.
 5. Al primo giro pianificato del giorno (`--pianificato`), se il computer non è secondario, scrive il battito
    `automazioni/battiti/sincronizza.txt`. I giri lanciati a mano non lo scrivono: il battito dice che la
    sincronizzazione automatica è viva.
@@ -125,7 +126,9 @@ ordine, 1 comando di sistema non riuscito, 2 opzione sconosciuta.
 ## Dove gira
 Sul computer dove si lavora con la cartella, con Git e Node 18 o più recente: Windows, macOS e Linux. Solo un
 computer è il principale; sugli altri si lancia una volta `node bin/sincronizza.mjs --secondario`. Le routine nel cloud non
-lo usano: salvano da sole come dice `automazioni/_comune.md`. A computer spento non gira, e il battito lo mostra.
+lo usano: salvano da sole come dice `automazioni/_comune.md`. Non lo usa nemmeno un agente nel cloud sul repository
+(strada C): salva con `git add -A`, commit e push sul ramo che la piattaforma usa. Con il cervello in un archivio
+cloud (strada D) non si usa: lì niente Git. A computer spento non gira, e il battito lo mostra.
 
 ## Collegamenti
 - [[dove-si-lavora]]: una sola copia scrivibile, il repository come fonte di verità.

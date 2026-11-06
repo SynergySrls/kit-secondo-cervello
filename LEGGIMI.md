@@ -9,7 +9,7 @@ Dei controlli automatici trovano ciò che la memoria dell'AI dimentica: link rot
 Funziona con qualunque AI, perché tutto sta in file aperti, markdown (testo semplice con pochi segni) e Git (la storia
 di ogni modifica), e non dentro una piattaforma.
 
-Versione del kit: 1.1, del 2026-11-06 (in più `INSTALLA.md`). La prima voce del log del tuo cervello la riporta; per portare in un cervello
+Versione del kit: 1.2, del 2026-11-06 (in più `INSTALLA.md` e le quattro strade di dove vive il cervello, guida 2.1). La prima voce del log del tuo cervello la riporta; per portare in un cervello
 già in uso gli script di un kit più nuovo, vedi la guida, capitolo 14.6.
 
 ## Tre strade
@@ -45,7 +45,10 @@ seguire `INSTALLA.md` di questo kit. Fa lui i passi qui sotto, ti intervista e t
 
 1. Leggi il capitolo 0 di `GUIDA.md` («In una pagina») e scegli il livello (capitolo 2).
 2. Apri la scheda della tua AI in `piattaforme/`.
-3. Copia la cartella `modello/` in una cartella tua, fuori da Drive, OneDrive, Dropbox e simili, poi incolla il prompt
+3. Scegli dove vive il cervello: sul computer, sul computer con GitHub, solo su GitHub o in Drive, ognuna con le sue
+   conseguenze (guida, capitolo 2.1). Solo su GitHub (strada C) non installi niente: crei il repository privato e fai
+   seguire `INSTALLA.md` a un agente nel cloud. Di norma copi la cartella `modello/` in una cartella tua, fuori da Drive,
+   OneDrive, Dropbox e simili, poi incolli il prompt
    (il testo da dare all'AI) A di `PROMPT-DI-AVVIO.md`; solo chat: il prompt B. Se hai già note, un vault di Obsidian
    o un'altra app di appunti: prima il prompt A, poi il C (il vecchio archivio resta dov'è e viene solo letto).
 4. Segui il capitolo del tuo livello: livello 1 capitolo 5, livello 2 capitolo 3, livello 3 capitoli 3 e 4.

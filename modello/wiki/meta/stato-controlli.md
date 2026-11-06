@@ -2,7 +2,7 @@
 title: "Stato dei controlli"
 type: meta
 generato: true
-aggiornato: 2026-11-04 12:27
+aggiornato: 2026-11-06 20:26
 ---
 
 # Stato dei controlli
@@ -27,8 +27,8 @@ VERDE   j) Radice e file di istruzioni
 VERDE   k) Doppioni
 SPENTO  l) Pagine escluse da .gitignore: Git non attivo in questa cartella
 VERDE   m) Hot cache
-GIALLO  n) Segnaposto da compilare (13): 49 segnaposto da compilare in 13 file
-          wiki/meta/mappa-del-cervello.md: 19
+GIALLO  n) Segnaposto da compilare (13): 54 segnaposto da compilare in 13 file
+          wiki/meta/mappa-del-cervello.md: 24
           wiki/meta/id-sistemi-esterni.md: 8
           automazioni/plugin-cervello/skills/cervello/SKILL.md: 4
           wiki/concepts/ambito.md: 3

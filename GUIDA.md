@@ -44,7 +44,8 @@ Tre livelli, dal più semplice al più completo:
 
 Il primo giorno, al livello 2:
 1. installi Node (il programma che fa girare gli script del kit) e un agente;
-2. copi la cartella `modello/` del kit in una cartella tua, fuori dalle cartelle sincronizzate;
+2. copi la cartella `modello/` del kit in una cartella tua, di norma fuori dalle cartelle sincronizzate (dove tenerlo e
+   con quali conseguenze: 2.1);
 3. apri l'agente in quella cartella e incolli il prompt (il testo da dare all'AI) A di `PROMPT-DI-AVVIO.md`;
 4. rispondi alle domande: chi sei, cosa entra nel cervello, come vuoi che ti si scriva;
 5. lanci `node bin/controlla.mjs`: zero rossi vuol dire che il cervello è in ordine.
@@ -155,6 +156,71 @@ Una cosa vale per tutti i livelli: **il kit non è il cervello.** La cartella de
 Il tuo cervello nasce copiando `modello/` in un'altra cartella; non si lavora mai dentro la cartella del kit, che ha
 istruzioni sue per chi ne fa manutenzione.
 
+### 2.1 Dove vive il cervello: computer, GitHub o Drive
+
+Il cervello è una cartella, e si sceglie dove sta la copia su cui si scrive. Le quattro strade non si equivalgono:
+decidono quali livelli raggiungi e cosa funziona.
+
+| | A. Sul computer | B. Computer e GitHub (consigliata) | C. Solo su GitHub | D. In Drive, OneDrive, Dropbox o iCloud |
+|---|---|---|---|---|
+| Dove sta la copia su cui si scrive | una cartella del computer, per esempio `~/Cervello` | la stessa cartella, salvata ogni 10 minuti in un repository privato su GitHub, che fa fede | il repository privato su GitHub, su cui lavora un agente nel cloud | una cartella dentro l'archivio cloud, tenuta sul computer dal suo programma (Drive per desktop, OneDrive) |
+| Cosa serve | Node e un agente | in più Git, un account GitHub, GitHub CLI | un account GitHub e una piattaforma con agenti nel cloud che lavorano su un repository (vedi la scheda in `piattaforme/`) | Node, un agente, il programma dell'archivio sul computer |
+| Storia delle modifiche | solo se aggiungi Git sul computer (3.8) | completa: ogni errore si annulla | completa | solo la cronologia delle versioni dell'archivio, che dura poco e va file per file; per iCloud *(da confermare)* |
+| Copia fuori dal computer | no: serve un backup (3.2) | sì, su GitHub | tutto sta su GitHub | sì, nell'archivio cloud |
+| Più computer | no | sì, uno principale e gli altri secondari | da qualunque dispositivo, attraverso l'agente nel cloud | no: due computer che scrivono nella stessa cartella fanno nascere copie in conflitto |
+| Livelli | 1 e 2 | 1, 2 e 3 | 3, senza le parti che vivono sul computer | 1 e 2 |
+| Controllo quotidiano, avvisi, Custode, plugin | no | sì | sì | no: vivono su GitHub |
+| Hook e script | sì | sì | solo se la piattaforma nel cloud li esegue | sì, sul computer |
+| Obsidian | sì | sì | no, finché non cloni il repository su un computer (e diventa la B) | sì |
+| Dal telefono | il pacchetto per le chat (capitolo 5) | in più il plugin per le chat | l'agente nel cloud dove la piattaforma lo permette, e il plugin | le chat con il connettore dell'archivio leggono i file direttamente *(da confermare)* |
+
+La strada D sembra la più comoda ed è quella che dà più problemi. Le sue conseguenze:
+- **Un solo scrittore.** Scrive un computer solo, con un agente alla volta. Due computer, oppure il computer e il sito
+  dell'archivio, che toccano lo stesso file nello stesso momento fanno nascere copie «(1)», «(2)»: il controllo k trova
+  i nomi tipici delle copie in conflitto, ma vanno ricucite a mano.
+- **Niente Git dentro la cartella.** Il programma dell'archivio e Git si contendono gli stessi file e la storia di Git
+  si può rovinare. Quindi niente `git init` lì dentro, niente sincronizzazione del kit e niente livello 3: si tolgono
+  le righe `sincronizza` e `custode` dalla tabella «Battiti» di `automazioni/LEGGIMI.md` (senza GitHub il Custode non
+  c'è), altrimenti il controllo i resta giallo per sempre.
+- **Le chat leggono, non modificano.** Il connettore di un archivio cloud spesso non modifica un file ma ne crea uno
+  nuovo con lo stesso nome. Dalle chat si legge e basta; se il connettore sa creare file, può lasciare una nota nuova in
+  `.raw/inbox/` *(da confermare: che il connettore arrivi in quella cartella e che l'archivio sincronizzi le cartelle
+  che iniziano con il punto)*, mai cambiare una pagina.
+- **I file devono stare sul computer.** La cartella del cervello va resa «disponibile offline» (Drive per desktop),
+  «mantieni sempre su questo dispositivo» (OneDrive), «Rendi disponibile offline» (Dropbox) o «Mantieni scaricato»
+  (iCloud) *(da confermare per Dropbox e iCloud)*: un file che esiste solo online l'agente non lo legge, o lo legge in
+  ritardo.
+- **La storia è corta.** La cronologia delle versioni dell'archivio dura un tempo limitato e va file per file: non c'è
+  un modo semplice di tornare a com'era il cervello una settimana fa. Che iCloud ne abbia una è *(da confermare)*.
+  Serve comunque un backup del sistema.
+- **Le chiavi restano fuori.** La cartella privata delle chiavi non va mai nell'archivio cloud, neanche in questo caso.
+- **Nell'archivio va tutta la cartella.** Anche gli originali di `.raw/`, che su GitHub non andrebbero, e le pagine
+  riservate; e il connettore di una chat legge anche le pagine con `riservato: true`, che il pacchetto per le chat
+  tiene fuori (8.6).
+
+La strada C ha tre conseguenze da sapere prima: l'agente nel cloud parte ogni volta da una copia nuova del repository
+e salva caricando le modifiche (su alcune piattaforme su un ramo separato, che unisci tu su GitHub); senza computer
+non girano la sincronizzazione, Obsidian e gli strumenti che hanno bisogno delle chiavi, quindi si toglie la riga
+`sincronizza` dalla tabella «Battiti» di `automazioni/LEGGIMI.md`; e gli originali messi in `.raw/` non restano da una
+sessione all'altra, perché `.raw/` è escluso da Git: un testo incollato in chat o caricato nella sessione si ingerisce
+subito, ed entra la sintesi. Una nota per il cervello si aggiunge anche dal sito di GitHub, con «Add file» nella
+cartella `.raw/inbox/`, che Git conserva.
+
+Delle schede in `piattaforme/`, la strada C la regge GitHub Copilot con il suo agente nel cloud (che lavori a turni
+con la persona, come serve all'intervista, è da confermare) e, da confermare sulle pagine ufficiali, Claude (le sessioni di Claude Code nel cloud), Codex nel cloud (la sua pagina è marcata
+«Legacy»), Cursor e Mistral; Google oggi no. Questa guida non ha i passi della C: si installa con `INSTALLA.md`, che
+l'agente nel cloud segue dalla sessione aperta sul repository.
+
+Come scegliere: per provare, la A; per tenerlo davvero, la B. La C se non vuoi installare niente e la tua piattaforma ha
+agenti nel cloud su un repository. La D solo se usi un computer solo, non ti serve il livello 3 e vuoi i file
+nell'archivio cloud che usi già. Se ti serve vedere il cervello dal telefono, la strada più sicura è la B con una copia
+di sola lettura nell'archivio: ogni tanto copi lì la cartella `esporta/` di `node bin/costruisci.mjs --esporta`, e le
+chat con il connettore la leggono *(da confermare per ogni piattaforma)*. Una copia di sola lettura non si modifica: si sostituisce.
+
+La scelta si scrive in `wiki/meta/mappa-del-cervello.md`. Dalla A si passa alla B senza rifare niente (capitolo 4).
+Dalla D alla B: copi la cartella fuori dall'archivio, lavori solo sulla copia nuova, sposti la vecchia in una cartella
+d'archivio dove nessuno la modifica più per sbaglio, poi il passo Git.
+
 ## 3. Livello 2 passo per passo
 
 ### 3.1 I programmi
@@ -185,7 +251,7 @@ versioni e per avviare l'agente.
 
 | Sì | No |
 |---|---|
-| una cartella nella tua cartella utente, per esempio `~/Cervello` (su Windows `C:\Users\<te>\Cervello`) | dentro Drive, OneDrive, Dropbox, iCloud o un'altra cartella sincronizzata nei due sensi |
+| una cartella nella tua cartella utente, per esempio `~/Cervello` (su Windows `C:\Users\<te>\Cervello`) | dentro Drive, OneDrive, Dropbox, iCloud o un'altra cartella sincronizzata nei due sensi, a meno che tu abbia scelto la strada D del 2.1 sapendone le conseguenze |
 | un disco del computer, sempre presente | Documenti o Scrivania, se il sistema li sincronizza con un archivio cloud (succede spesso, anche senza che te ne accorga) |
 | un nome corto, senza spazi e senza accenti | Download, una chiavetta, un disco di rete |
 | una cartella che non sta dentro un'altra cartella Git | la cartella del kit |
@@ -197,6 +263,8 @@ doppioni e la storia di Git si può rovinare.
 > - al livello 2: un repository privato su GitHub anche senza sincronizzazione automatica (4.1 e 4.2, parti A e B,
 >   poi `node bin/sincronizza.mjs` a fine giornata), oppure il backup del sistema (Cronologia file su Windows, Time
 >   Machine su macOS) su un disco esterno;
+> - con la strada D del 2.1: niente repository dentro l'archivio; la copia fuori dal computer è l'archivio stesso, ma
+>   la sua storia è corta, quindi serve comunque il backup del sistema su un disco esterno;
 > - al livello 3: GitHub copre la cartella, ma non gli originali di `.raw/` né i file pesanti (restano nel loro
 >   archivio) né le chiavi (la loro copia sta nel gestore di password);
 > - i codici di recupero dell'accesso in due passaggi di GitHub si conservano fuori dal computer.
@@ -224,8 +292,9 @@ dall'app. La prima volta Claude Code chiede se ti fidi della cartella: rispondi 
 gli hook. Claude Code legge `CLAUDE.md`, che importa `AGENTS.md`.
 
 Nella prima sessione l'agente lancia una ventina di comandi (`node --version`, `node bin/controlla.mjs`,
-`node bin/costruisci.mjs`, `git init`, `git add`, `git commit`) e modifica molti file, e Claude Code chiede ogni volta
-se consentire. Il modello ne approva già alcuni di sola lettura (`.claude/settings.json`, voce `permissions`); per i
+`node bin/costruisci.mjs`, `git init`, `git add`, `git commit`; con la strada D del 2.1 niente comandi `git`, perché in
+quella cartella Git non si usa) e modifica molti file, e Claude Code chiede ogni volta se consentire. Il modello ne
+approva già alcuni di sola lettura (`.claude/settings.json`, voce `permissions`); per i
 comandi `node bin/...` e `git ...` dentro la cartella del cervello puoi rispondere di sì per la sessione. Un comando
 che legge la cartella delle chiavi lo nega comunque l'hook `proteggi`.
 
@@ -243,8 +312,10 @@ modello dentro il vecchio archivio. Il cervello nasce nella sua cartella nuova; 
 se è in una cartella sincronizzata, perché viene solo letto. Prima il prompt A, poi il prompt C di
 `PROMPT-DI-AVVIO.md`, che lo porta dentro un gruppo di file alla volta.
 
-Poi incolla il prompt A di `PROMPT-DI-AVVIO.md`. L'obiettivo della prima sessione è compilare i segnaposto che contano
-di più. L'agente te li chiede a voce, non devi aprire i file:
+Poi incolla il prompt A di `PROMPT-DI-AVVIO.md`. Per prima cosa ti chiede la strada del 2.1, se non l'hai già scelta,
+e la scrive in `wiki/meta/mappa-del-cervello.md`; con la strada C la prima sessione non sta sul computer ma nel cloud,
+e la guida `INSTALLA.md`. L'obiettivo della prima sessione è compilare i segnaposto che contano di più. L'agente te li
+chiede a voce, non devi aprire i file:
 
 | Cosa | Dove finisce | Perché subito |
 |---|---|---|
@@ -319,13 +390,15 @@ sulla stessa cartella si pestano i piedi.
 Non è obbligatorio, ma conviene: con Git ogni modifica ha una storia e un errore si annulla. Fai la parte A del passo
 Git (capitolo 4.2), senza collegare GitHub. Da lì `node bin/sincronizza.mjs` fa il salvataggio locale e si ferma, e
 puoi installarlo ogni 10 minuti come al livello 3. Git da solo sta sullo stesso disco: per una copia altrove vedi il
-riquadro «Copia di sicurezza» del 3.2.
+riquadro «Copia di sicurezza» del 3.2. Con la strada D del 2.1 questo capitolo non vale: dentro una cartella di un
+archivio cloud Git non si usa.
 
 Senza Git il controllo l (pagine escluse da `.gitignore`) resta spento, ed è normale. Il controllo i resta giallo
 finché i battiti di `sincronizza` e `custode` non partono. Il battito `sincronizza` lo scrive solo la sincronizzazione
 pianificata (`node bin/installa-sincronizzazione.mjs --fai`): un giro lanciato a mano o dall'agente non lo scrive, così
 non diventa rosso se per qualche giorno non lavori. Se non userai una delle due automazioni, togli la sua riga dalla
-tabella «Battiti» di `automazioni/LEGGIMI.md` e il giallo sparisce.
+tabella «Battiti» di `automazioni/LEGGIMI.md` e il giallo sparisce. Con la strada D non partirà nessuna delle due:
+togli tutte e due le righe; con la C non parte la sincronizzazione: togli la riga `sincronizza`.
 
 ## 4. Livello 3: il sistema completo
 
@@ -396,7 +469,7 @@ Se il giro si ferma, il registro scrive «FERMO» e il motivo:
 
 | Il registro dice | Cosa fare |
 |---|---|
-| la cartella non è un repository Git | parte A: `git init -b main` |
+| la cartella non è un repository Git | parte A: `git init -b main`; con la strada D del 2.1 la sincronizzazione non si usa: niente `git init` in quella cartella |
 | la cartella non è la radice del repository trovato | il cervello sta dentro un'altra cartella Git: spostalo fuori, oppure rifai `git init -b main` nella sua cartella |
 | il cervello è sul ramo ... | il comando tra parentesi: `git switch main`, oppure `git branch -m main` se il ramo `main` non c'è ancora (il repository è nato con un altro nome, per esempio `master`) |
 | un rebase o un merge in sospeso | un'operazione di Git è rimasta a metà: chiedi all'agente di guardare `git status` e sistemarla |
@@ -1006,8 +1079,8 @@ domanda «cosa sappiamo di X?» il cervello non risponde. Delle persone si scriv
 
 Una pagina con `riservato: true` nel frontmatter resta fuori dal pacchetto per le chat di
 `node bin/costruisci.mjs --esporta`. Serve per ciò che non deve uscire dal computer e dal repository: una trattativa,
-un caso delicato. Non è una cassaforte: la pagina resta nella cartella e, al livello 3, su GitHub. I segreti non ci
-vanno comunque (capitolo 12). Con `esporta: no` una pagina resta fuori dal pacchetto perché in chat non serve (le
+un caso delicato. Non è una cassaforte: la pagina resta nella cartella, al livello 3 su GitHub e, con la strada D del 2.1,
+nell'archivio cloud, dove il connettore di una chat la legge come le altre. I segreti non ci vanno comunque (capitolo 12). Con `esporta: no` una pagina resta fuori dal pacchetto perché in chat non serve (le
 pagine degli script del modello lo hanno già).
 
 ### 8.7 I modelli di pagina
@@ -1073,7 +1146,8 @@ fughe sono nel capitolo 12.
 - **File letti con la codifica sbagliata.** PowerShell 5.1 legge come ANSI i file `.ps1` salvati in UTF-8 senza BOM
   (ANSI e UTF-8 sono due codifiche dei caratteri; il BOM è il segno iniziale che dichiara la codifica): le lettere
   accentate si rompono. Gli strumenti del kit sono in Node anche per questo.
-- **Cartelle sincronizzate.** Il cervello e i file di Git non stanno dentro Drive, OneDrive, Dropbox o simili.
+- **Cartelle sincronizzate.** Di norma, tranne la strada D del capitolo 2.1, il cervello non sta dentro Drive, OneDrive,
+  Dropbox o simili; i file di Git non ci stanno mai.
 - **Percorsi con spazi e barre rovesciate.** I percorsi con spazi vanno tra virgolette; nei terminali bash su Windows
   si scrivono con le barre normali (`C:/Users/...`).
 
@@ -1176,8 +1250,9 @@ esempio dentro una regola di permesso che contiene un comando con la password). 
 segreti del repository GitHub, e nelle pagine si scrive solo dove stanno. Le difese del kit, una sopra l'altra:
 - `.gitignore` esclude i file con nomi da credenziale (`.env`, `*password*`, `*secret*`, chiavi private e simili),
   tranne le pagine, gli script e le procedure, che devono arrivare agli altri computer (il controllo l lo verifica);
-- `.gitignore` esclude anche gli originali di `.raw/` (esportazioni, trascrizioni, mail): restano sul computer, e su
-  Git vanno solo le note di `.raw/inbox/`;
+- `.gitignore` esclude anche gli originali di `.raw/` (esportazioni, trascrizioni, mail): restano sul computer (con la strada
+  D del 2.1 anche nell'archivio cloud; con la C non restano tra una sessione e l'altra), e su Git vanno solo le note di
+  `.raw/inbox/`;
 - la sincronizzazione passa ogni file in uscita da `node bin/controlla.mjs --segreti` e tiene fuori quelli sospetti
   (se il controllo non risponde, tutto il gruppo);
 - il controllo e cerca i formati tipici delle chiavi nei file del repository, compreso il token del bot Telegram che
@@ -1201,7 +1276,9 @@ i codici IBAN validi.
 clona ha tutto il cervello.
 
 **Le chat vedono ciò che carichi.** Il pacchetto di `--esporta` e i file caricati finiscono sui server della
-piattaforma: scegli cosa entra, con `riservato: true` sulle pagine che non devono uscire. Una conversazione esportata
+piattaforma: scegli cosa entra, con `riservato: true` sulle pagine che non devono uscire. Con la strada D il connettore
+dell'archivio vede tutta la cartella, pagine riservate comprese: `riservato: true` vale solo per il pacchetto. Una
+conversazione esportata
 da una chat può contenere dati che nel cervello non devono stare: prima di metterla in `.raw/` rileggila.
 
 **Le chiavi non si chiedono all'AI.** Un'AI non deve mai vedere il valore di una chiave: per sapere se c'è,
@@ -1333,8 +1410,9 @@ sostituisce intero si rilegge prima e si verifica dopo.
 **23. Scrivere attraverso un archivio cloud.** Il connettore creava un file nuovo invece di modificare quello vecchio:
 settimane di dati sono finite in copie «(1)», «(2)», mentre il file vero restava fermo. In un altro caso la cartella
 del cervello era sincronizzata nei due sensi e ciò che una chat scriveva lì arrivava nel repository senza revisione.
-*Il kit:* una sola copia scrivibile; le chat lasciano una nota per il cervello; il cervello fuori dalle cartelle
-sincronizzate; il controllo k segnala i doppioni.
+*Il kit:* una sola copia scrivibile; le chat lasciano una nota per il cervello; il cervello di norma fuori dalle
+cartelle sincronizzate, tranne la strada D del capitolo 2.1 (un solo computer che scrive, niente Git); il controllo k
+segnala i nomi tipici delle copie in conflitto.
 
 **24. Più scrittori sugli stessi file.** Sessioni, routine e due computer che scrivevano insieme: la sincronizzazione
 si fermava più volte in pochi giorni.
@@ -1448,7 +1526,11 @@ Più persone sullo stesso cervello:
 
 ## 15. Prova finale
 
-Il cervello funziona se tutte le voci del tuo livello sono vere.
+Il cervello funziona se tutte le voci del tuo livello sono vere. Le voci che la tua strada (2.1) non ha si saltano:
+- strada C: la sincronizzazione (`--stato` con giri recenti, «secondario» sugli altri computer, la modifica fatta sul
+  computer che compare su GitHub), le chiavi sul computer (`node bin/lib/chiavi.mjs --verifica`) e, se la
+  piattaforma non esegue gli hook, la voce «Con Claude Code» sul controllo d'avvio;
+- strada D: tutto il livello 3; la copia fuori dal computer del livello 2 è l'archivio cloud più il backup del sistema.
 
 **Livello 1**
 - [ ] In una chat nuova del progetto, «cosa c'è in corso?» riceve una risposta dai file, con la data della copia.

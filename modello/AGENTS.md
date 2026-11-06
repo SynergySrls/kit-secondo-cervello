@@ -46,8 +46,9 @@ sistema dal vivo. Solo allora si scrive.
 - Con la cartella: si scrive sul posto, con gli strumenti di modifica dei file.
 - Senza la cartella, o con una copia di sola lettura: non si scrive nel cervello e lo si dice. Si prepara una nota per
   il cervello nel formato di `_modelli/nota-inbox.md`, che l'utente salva in `.raw/inbox/`.
-- Mai da una copia sincronizzata (Drive, OneDrive, Dropbox e simili): il connettore crea doppioni invece di modificare
-  ([[dove-si-lavora]]).
+- Mai modificare attraverso un connettore o una seconda copia sincronizzata (Drive, OneDrive, Dropbox e simili): il
+  connettore crea doppioni invece di modificare. Se il cervello sta in un archivio cloud per scelta (strada D in
+  [[mappa-del-cervello]]), scrive un solo computer e lì niente Git ([[dove-si-lavora]]).
 
 ## Chiusura di sessione
 
@@ -60,9 +61,12 @@ A fine lavoro, oppure con `/chiudi` in Claude Code:
 5. un errore di oggi che può ripetersi diventa una pagina ([[imparare-dagli-errori]]);
 6. se hai cambiato una pagina regola o `wiki/meta/strumenti.md`, `node bin/costruisci.mjs`; poi, sempre,
    `node bin/controlla.mjs` e si correggono i rossi causati in questa sessione;
-7. se c'è Git, si salva con `node bin/sincronizza.mjs` (salva anche senza repository online e, se c'è, scarica e
-   carica) e si riporta la riga che stampa. Senza Node: `git add -A` e `git commit -m "<cosa è cambiato>"`, e con un
-   repository online `git pull --rebase origin main` e `git push origin main`.
+7. il salvataggio, secondo la strada scritta in [[mappa-del-cervello]]. Con Git sul computer (strade A e B) si salva
+   con `node bin/sincronizza.mjs` (salva anche senza repository online e, se c'è, scarica e carica) e si riporta la
+   riga che stampa; senza Node: `git add -A` e `git commit -m "<cosa è cambiato>"`, e con un repository online
+   `git pull --rebase origin main` e `git push origin main`. Con un agente nel cloud sul repository (strada C) si salva
+   con `git add -A`, commit e push sul ramo che la piattaforma usa, mai con `node bin/sincronizza.mjs`. Con il cervello
+   in un archivio cloud (strada D) niente Git: i file li salva l'archivio.
 
 ## Come si cambia una regola
 
@@ -79,7 +83,7 @@ Il blocco qui sotto lo scrive `node bin/costruisci.mjs` dalle pagine regola: non
 `wiki/meta/nucleo.md`.
 
 <!-- genera: nucleo -->
-> Generato il 2026-11-04 da `node bin/costruisci.mjs` dalle pagine regola: non si modifica a mano.
+> Generato il 2026-11-06 da `node bin/costruisci.mjs` dalle pagine regola: non si modifica a mano.
 > Per cambiare una regola si cambia la sua pagina (sezione «In breve») e si rilancia lo script.
 
 Qui ogni regola è in breve; la regola intera sta nella pagina linkata. Se una memoria, una skill o un plugin dicono
@@ -101,7 +105,7 @@ Questo cervello è di {{DA COMPILARE: il tuo nome}} e contiene il lavoro per {{D
 - Mai segreti né dati personali di terzi: si scrive solo dove stanno. Le pagine delicate hanno `riservato: true`.
 
 #### Dove si lavora e dove si scrive ([[dove-si-lavora]])
-- Si scrive in una copia sola, la cartella del cervello (con Git fa fede il repository); mai da una copia sincronizzata (Drive, OneDrive, Dropbox): nascono doppioni.
+- Si scrive in una copia sola, la cartella del cervello (con Git fa fede il repository); mai modificare attraverso un connettore o una seconda copia sincronizzata: nascono doppioni. Se il cervello sta in un archivio cloud per scelta (strada D in [[mappa-del-cervello]]), scrive un solo computer e lì niente Git.
 - Chi non può scrivere legge in sola lettura, lo dice e prepara una nota per `.raw/inbox/`.
 - Le chiavi stanno nella cartella privata fuori dal cervello: non si leggono e non si stampano.
 
@@ -151,7 +155,7 @@ Questo cervello è di {{DA COMPILARE: il tuo nome}} e contiene il lavoro per {{D
 |---|---|---|---|---|
 | nuova regola, regola nuova, cambiare una regola, cambia una regola, nucleo | `/nuova-regola`, o la pagina e poi `node bin/costruisci.mjs` | computer con Node | regole in `AGENTS.md` o nelle memorie; nucleo a mano | [[fonte-unica]] |
 | controlla il cervello, controllo del cervello, link rotti, segnaposto | `node bin/controlla.mjs` ([[stato-controlli]] lo scrive GitHub; senza repository online `--scrivi`) | computer, GitHub | stato dei controlli a mano | [[controlla]] |
-| sincronizza, sincronizzazione, salva su github, salvataggio su github, conflitto di sincronizzazione | `node bin/sincronizza.mjs` (`--stato`) | computer principale con Git | una cartella sincronizzata | [[sincronizza]] |
+| sincronizza, sincronizzazione, salva su github, salvataggio su github, conflitto di sincronizzazione | `node bin/sincronizza.mjs` (`--stato`) | computer principale con Git | una cartella sincronizzata (strada D); un agente nel cloud (strada C), che salva con commit e push | [[sincronizza]] |
 | ingerisci, ingestione, fonte nuova, archivia | `/ingerisci` o `automazioni/ingestione.md` | dove si scrive | il file intero nel cervello | [[ingestione]] |
 | chiudi, chiusura, fine sessione | `/chiudi` (chiusura di `AGENTS.md`) | dove si scrive | chiudere senza hot e log | [[log]] |
 | altra ai, altre ai, chat esterna, esporta, file di conoscenza | `node bin/costruisci.mjs --esporta` | computer con Node | pagine copiate a mano nelle chat | [[costruisci]] |

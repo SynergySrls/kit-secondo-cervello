@@ -27,6 +27,7 @@
 // Nessuna dipendenza: Node 18 o più recente, più Git se c'è (senza Git i controlli che lo usano lo dicono).
 
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -943,8 +944,18 @@ function controlloRadice(c) {
 
 // ---------------------------------------------------------------- k) doppioni
 
+// I nomi tipici delle copie in conflitto: «(1)», « 2.», «copia di», «copy of», «- Copia», «conflicted copy» e
+// «copia in conflitto» (Dropbox), e il nome di questo computer in coda prima dell'estensione, «-<nome computer>»,
+// come fa OneDrive (senza distinguere maiuscole). Un nome che non segue questi schemi può sfuggire.
 function controlloDoppioni(c) {
-  const segni = [/\(\d+\)/, / \d+\.[^./\s]+$/, /copia di/i, /copy of/i, / - copia/i];
+  const segni = [/\(\d+\)/, / \d+\.[^./\s]+$/, /copia di/i, /copy of/i, / - copia/i, /conflitt|conflicted copy/i];
+  // Nomi di computer troppo corti o generici (ubuntu, localhost, pc...) segnerebbero pagine legittime: si saltano.
+  const GENERICI = new Set(['localhost', 'ubuntu', 'debian', 'fedora', 'linux', 'raspberrypi', 'pc', 'desktop', 'laptop',
+    'computer', 'macbook', 'imac', 'mac', 'server', 'home', 'host']);
+  const host = String(os.hostname() || '').trim();
+  for (const h of new Set([host, host.split('.')[0]])) {
+    if (h.length >= 4 && !GENERICI.has(h.toLowerCase())) segni.push(new RegExp(`-${escapeRe(h)}(\\.[^./]+)?$`, 'i'));
+  }
   for (const f of cammina({ cartelle: true })) {
     if (!fuoriRaw(f)) continue;
     const nome = path.posix.basename(f.replace(/\/$/, ''));

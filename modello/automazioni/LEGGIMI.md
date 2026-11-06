@@ -45,6 +45,11 @@ che il controllo capisce: «ogni giorno», «ogni N giorni», «settimanale», �
 | sincronizza | lo script di sincronizzazione del computer principale (`bin/sincronizza.mjs --pianificato`, cioè l'attività pianificata), al primo giro del giorno; i giri a mano non lo scrivono; il computer può restare spento nel fine settimana | ogni 3 giorni |
 | custode | la routine Custode del cervello, a fine giro | ogni giorno |
 
+Una riga si toglie quando quell'automazione non partirà mai, secondo la strada scritta in
+`wiki/meta/mappa-del-cervello.md`: con un agente nel cloud sul repository (strada C) la riga `sincronizza`; con il
+cervello in un archivio cloud (strada D) le righe `sincronizza` e `custode`, perché senza GitHub il Custode non c'è.
+Altrimenti il controllo i resta giallo per sempre.
+
 ## Le fonti dei plugin
 
 | Cartella | Plugin | Cosa contiene |

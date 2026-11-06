@@ -28,10 +28,14 @@ La chiusura di sessione di `AGENTS.md`, fatta per intero.
    dicono.
 9. **Fuori dal cervello.** Se hai creato, spostato o spento qualcosa che vive fuori (una routine, un documento
    pubblicato, una cartella), aggiorna la sua riga in `wiki/meta/mappa-del-cervello.md`.
-10. **Salvataggio.** Se il cervello sta su Git: `node bin/sincronizza.mjs`, che salva anche senza repository online
-    e, se c'è, scarica e carica. Riporta la riga che stampa: se dice FERMO o CONFLITTO, dillo con le sue parole.
-    Senza Node: `git add -A` e `git commit -m "<cosa è cambiato>"`; poi, solo se `git remote` elenca origin,
-    `git pull --rebase origin main` e `git push origin main`.
+10. **Salvataggio**, secondo la strada scritta in `wiki/meta/mappa-del-cervello.md`. Con Git sul computer (strade A
+    e B): `node bin/sincronizza.mjs`, che salva anche senza repository online e, se c'è, scarica e carica. Riporta la
+    riga che stampa: se dice FERMO o CONFLITTO, dillo con le sue parole. Senza Node: `git add -A` e
+    `git commit -m "<cosa è cambiato>"`; poi, solo se `git remote` elenca origin, `git pull --rebase origin main` e
+    `git push origin main`. Con un agente nel cloud sul repository (strada C): `git add -A`,
+    `git commit -m "<cosa è cambiato>"` e `git push` sul ramo che la piattaforma usa, mai `node bin/sincronizza.mjs`;
+    se è un ramo separato, di' all'utente di unirlo su GitHub. Con il cervello in un archivio cloud (strada D): niente
+    Git, i file li salva l'archivio.
 11. **Rispondi** in 3-5 righe: cosa è entrato nel cervello e dove, cosa resta aperto, se il salvataggio è riuscito.
 
 ## Cosa non fai

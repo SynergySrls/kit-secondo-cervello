@@ -212,6 +212,16 @@ questo lavoro.
 6. Un Progetto con i file esportati si può ricreare: è una copia di sola lettura.
 7. Scrivi il secondo account in `wiki/meta/mappa-del-cervello.md`.
 
+## Strada C: solo GitHub, con un agente nel cloud
+
+Per la strada C del capitolo 2.1 della guida (il cervello solo nel repository privato su GitHub, senza una cartella sul
+computer) su Claude ci sono le sessioni di Claude Code nel cloud su un repository GitHub *(da confermare)*: la persona
+ne apre una sul repository del cervello e l'installazione la guida `INSTALLA.md` del kit. In una sessione aperta sul
+repository già pieno, Claude Code legge `CLAUDE.md` e quindi `AGENTS.md`; che partano anche gli hook di
+`.claude/settings.json` è da confermare. Si salva con `git add -A`, commit e push sul ramo che la sessione usa, mai con
+`node bin/sincronizza.mjs`: se è un ramo separato, lo unisci tu su GitHub. Custode e plugin funzionano come al livello
+3, perché lavorano sul repository.
+
 ## Cosa non si può fare
 
 - Dai Progetti non si scrive nel cervello: solo note per il cervello.
@@ -234,8 +244,10 @@ questo lavoro.
 - **Copie a mano di skill e plugin.** Divergono sempre, prima o poi: meglio il plugin dal repository.
 - **Descrizione della skill.** Quella del kit è sotto i 1.000 caratteri; se vale il limite di 200 citato da un articolo
   *(da confermare)*, va accorciata.
-- **Cartella sincronizzata.** Il cervello non sta in Drive, OneDrive o Dropbox, neanche per farlo vedere a Cowork:
-  nascono doppioni.
+- **Cartella sincronizzata.** Di norma il cervello non sta in Drive, OneDrive o Dropbox, neanche per farlo vedere a
+  Cowork: nascono doppioni. Se l'hai scelto (strada D del capitolo 2.1 della guida), Cowork lo collega come una
+  cartella qualunque *(da confermare)*, ma vale «un solo scrittore»: mai Cowork e un altro agente sulla stessa cartella
+  insieme.
 
 ## File del kit da usare
 
