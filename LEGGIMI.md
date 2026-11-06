@@ -34,6 +34,7 @@ piattaforme/         una scheda per famiglia di AI (Claude, ChatGPT e Codex, Goo
 modello/             il cervello vuoto: è questa la cartella che copi e diventa tua
 prova-kit.mjs        la prova automatica del kit (per chi lo modifica)
 CLAUDE.md            istruzioni per chi fa manutenzione al kit (non servono per usarlo)
+LICENSE              licenza MIT: puoi usare, modificare e ridistribuire il kit, lasciando l'avviso di copyright
 ```
 
 ## Da dove partire

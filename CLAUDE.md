@@ -12,6 +12,7 @@ e lavora su una copia di `modello/`, mai qui.
 | `PROMPT-DI-AVVIO.md` | il prompt che l'utente incolla nell'AI la prima volta |
 | `INSTALLA.md` | le istruzioni per un'AI con il terminale che installa e costruisce tutto; richiama la guida e il prompt A, non li ripete: se cambiano comandi o passi, va allineato |
 | `README.md` | la pagina d'ingresso del repository su GitHub: rimanda a `INSTALLA.md`, `LEGGIMI.md` e `GUIDA.md`, senza contenuti propri |
+| `LICENSE` | la licenza MIT, in inglese come vuole il testo ufficiale. È l'unico file con il nome del titolare: la regola «generico» qui sotto vale per tutto il resto |
 | `piattaforme/` | una scheda per famiglia di AI, ognuna con la data di verifica |
 | `modello/` | il cervello vuoto che l'utente copia |
 | `prova-kit.mjs` | la prova automatica: copia il modello in una cartella temporanea e prova script, hook e sincronizzazione |

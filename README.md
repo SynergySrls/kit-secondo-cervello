@@ -12,3 +12,6 @@ altre AI, perché tutto sta in file aperti.
 - **Il cervello vuoto da copiare**: [modello/](modello/).
 
 Il kit è pubblico, il tuo cervello no: quando lo metti su GitHub, il suo repository è sempre privato.
+
+Licenza MIT ([LICENSE](LICENSE)): puoi usare, copiare, modificare e ridistribuire il kit, anche per lavoro, purché
+resti l'avviso di copyright. Il kit è dato così com'è, senza garanzie.
